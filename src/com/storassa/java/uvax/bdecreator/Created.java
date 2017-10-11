@@ -5,14 +5,14 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.PrintWriter;
-import java.io.Writer;
+import java.nio.file.Paths;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
@@ -68,14 +68,27 @@ public class Created extends JDialog {
 						// if (returnVal == JFileChooser.APPROVE_OPTION) {
 						// File file = fc.getSelectedFile();
 						//
-						
-						File file = new File("sequenceNumber.txt");
-						
 						try {
-							PrintWriter bw = new PrintWriter(file);
-							bw.print(BdeMessagetextArea.getText());
-							bw.close();
+
+							String path = Created.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+							System.out.print(path);
+							File file = new File(System.getProperty("user.home") + "\\sequenceNumber.txt");
+							BufferedReader brSeqNumb = new BufferedReader(new FileReader(file));
+							String sequenceNumber = brSeqNumb.readLine();
+							int seq = Integer.parseInt(sequenceNumber);
+							
+							PrintWriter pwBde = new PrintWriter(new File(System.getProperty("user.home") + "\\MG-" + ++seq));
+							pwBde.print(BdeMessagetextArea.getText());
+							pwBde.close();
+							
+							brSeqNumb.close();
+
+							PrintWriter pwSeqNumb = new PrintWriter(file);
+
+							pwSeqNumb.print(seq);
+							pwSeqNumb.close();
 						} catch (Exception ex) {
+							ex.printStackTrace();
 						}
 						// }
 						System.exit(0);
