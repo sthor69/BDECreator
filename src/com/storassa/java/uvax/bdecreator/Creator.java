@@ -1,14 +1,15 @@
 package com.storassa.java.uvax.bdecreator;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Creator {
 
@@ -47,6 +48,11 @@ public class Creator {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		ZoneId z = ZoneId.of( "Europe/Rome" );
+		ZonedDateTime zdt = ZonedDateTime.now( z );
+		String date = zdt.toString().substring(0,19).replace("T", " ") + " L";
+
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
@@ -84,13 +90,13 @@ public class Creator {
 		nameText.setColumns(10);
 		
 		startDateText = new JTextField();
-		startDateText.setText("16-09-2011 10:15:00 L");
+		startDateText.setText(date);
 		startDateText.setBounds(189, 33, 169, 20);
 		frame.getContentPane().add(startDateText);
 		startDateText.setColumns(10);
 		
 		endDateText = new JTextField();
-		endDateText.setText("16-09-2011 10:28:00 L");
+		endDateText.setText(date);
 		endDateText.setBounds(189, 58, 169, 20);
 		frame.getContentPane().add(endDateText);
 		endDateText.setColumns(10);
@@ -102,13 +108,13 @@ public class Creator {
 		reasonText.setColumns(10);
 		
 		noteText = new JTextField();
-		noteText.setText("-77.812");
+		noteText.setText("1.2");
 		noteText.setBounds(189, 108, 169, 20);
 		frame.getContentPane().add(noteText);
 		noteText.setColumns(10);
 		
 		creationDateText = new JTextField();
-		creationDateText.setText("16-09-2011 09:15:00 L");
+		creationDateText.setText(date);
 		creationDateText.setBounds(189, 133, 169, 20);
 		frame.getContentPane().add(creationDateText);
 		creationDateText.setColumns(10);

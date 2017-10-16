@@ -19,8 +19,8 @@ import javax.swing.border.EmptyBorder;
 
 public class Created extends JDialog {
 
-	String name = "UP_NAPOLIL_4", startDate = "16-09-2011 10:15:00 L", endDate = "16-09-2011 10:28:00 L",
-			note = "Messaggio START", reason = "-77.812", creationDate = "16-09-2011 09:15:00 L";
+	String name = "UP_NAPOLIL_4", startDate = "16-10-2017 10:15:00 L", endDate = "16-10-2017 10:28:00 L",
+			note = "Messaggio START", reason = "1.2", creationDate = "16-10-2017 09:15:00 L";
 
 	private final JPanel contentPanel = new JPanel();
 	JTextArea BdeMessagetextArea;
@@ -71,7 +71,7 @@ public class Created extends JDialog {
 						try {
 
 							String path = Created.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-							System.out.print(path);
+							System.out.print(path.substring(0,path.length() - 14));
 							File file = new File(System.getProperty("user.home") + "\\sequenceNumber.txt");
 							BufferedReader brSeqNumb = new BufferedReader(new FileReader(file));
 							String sequenceNumber = brSeqNumb.readLine();
