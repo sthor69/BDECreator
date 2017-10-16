@@ -71,13 +71,14 @@ public class Created extends JDialog {
 						try {
 
 							String path = Created.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-							System.out.print(path.substring(0,path.length() - 14));
-							File file = new File(System.getProperty("user.home") + "\\sequenceNumber.txt");
+							path = path.substring(0,path.length() - 15) + File.separator;
+							System.out.print(path);
+							File file = new File(path + "sequenceNumber.txt");
 							BufferedReader brSeqNumb = new BufferedReader(new FileReader(file));
 							String sequenceNumber = brSeqNumb.readLine();
 							int seq = Integer.parseInt(sequenceNumber);
 							
-							PrintWriter pwBde = new PrintWriter(new File(System.getProperty("user.home") + "\\MG-" + ++seq));
+							PrintWriter pwBde = new PrintWriter(new File(path + "MG-" + ++seq + ".doc"));
 							pwBde.print(BdeMessagetextArea.getText());
 							pwBde.close();
 							

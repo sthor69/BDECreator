@@ -3,6 +3,7 @@ package com.storassa.java.uvax.bdecreator;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -51,7 +52,11 @@ public class Creator {
 		
 		ZoneId z = ZoneId.of( "Europe/Rome" );
 		ZonedDateTime zdt = ZonedDateTime.now( z );
-		String date = zdt.toString().substring(0,19).replace("T", " ") + " L";
+		String date = zdt.toString().substring(0,19).replace("T", " ");
+		
+		SimpleDateFormat dtnew = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss"); 
+		SimpleDateFormat dtold = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+
 
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -90,13 +95,17 @@ public class Creator {
 		nameText.setColumns(10);
 		
 		startDateText = new JTextField();
-		startDateText.setText(date);
+		try {
+		startDateText.setText(dtnew.format(dtold.parse(date)) + " L");
+		} catch (Exception e) {}
 		startDateText.setBounds(189, 33, 169, 20);
 		frame.getContentPane().add(startDateText);
 		startDateText.setColumns(10);
 		
 		endDateText = new JTextField();
-		endDateText.setText(date);
+		try {
+		endDateText.setText(dtnew.format(dtold.parse(date)) + " L");
+		} catch (Exception e) {}
 		endDateText.setBounds(189, 58, 169, 20);
 		frame.getContentPane().add(endDateText);
 		endDateText.setColumns(10);
@@ -112,9 +121,10 @@ public class Creator {
 		noteText.setBounds(189, 108, 169, 20);
 		frame.getContentPane().add(noteText);
 		noteText.setColumns(10);
-		
+		try {
 		creationDateText = new JTextField();
-		creationDateText.setText(date);
+		creationDateText.setText(dtnew.format(dtold.parse(date)) + " L");
+		} catch (Exception e) {}
 		creationDateText.setBounds(189, 133, 169, 20);
 		frame.getContentPane().add(creationDateText);
 		creationDateText.setColumns(10);
