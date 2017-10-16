@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -49,86 +50,94 @@ public class Creator {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		ZoneId z = ZoneId.of( "Europe/Rome" );
-		ZonedDateTime zdt = ZonedDateTime.now( z );
-		String date = zdt.toString().substring(0,19).replace("T", " ");
-		
-		SimpleDateFormat dtnew = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss"); 
-		SimpleDateFormat dtold = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 
+		ZoneId z = ZoneId.of("Europe/Rome");
+		ZonedDateTime zdt = ZonedDateTime.now(z);
+		String date = zdt.toString().substring(0, 19).replace("T", " ");
+
+		SimpleDateFormat dtnew = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		SimpleDateFormat dtold = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel nameLabel = new JLabel("Nome UPA/UCA");
 		nameLabel.setBounds(10, 11, 169, 14);
 		frame.getContentPane().add(nameLabel);
-		
+
 		JLabel startDateLabel = new JLabel("Data Ora Inizo");
 		startDateLabel.setBounds(10, 36, 169, 14);
 		frame.getContentPane().add(startDateLabel);
-		
+
 		JLabel EndDateLabel = new JLabel("Data Ora Fine");
 		EndDateLabel.setBounds(10, 61, 169, 14);
 		frame.getContentPane().add(EndDateLabel);
-		
+
 		JLabel reasonLabel = new JLabel("Motivazione");
 		reasonLabel.setBounds(10, 86, 169, 14);
 		frame.getContentPane().add(reasonLabel);
-		
+
 		JLabel noteLabel = new JLabel("Note");
 		noteLabel.setBounds(10, 111, 169, 14);
 		frame.getContentPane().add(noteLabel);
-		
+
 		JLabel creationDateLabel = new JLabel("Data Creazione Messaggio");
 		creationDateLabel.setBounds(10, 136, 169, 14);
 		frame.getContentPane().add(creationDateLabel);
-		
+
 		nameText = new JTextField();
 		nameText.setText("UP_NAPOLIL_4");
 		nameText.setBounds(189, 8, 169, 20);
 		frame.getContentPane().add(nameText);
 		nameText.setColumns(10);
-		
+
 		startDateText = new JTextField();
 		try {
-		startDateText.setText(dtnew.format(dtold.parse(date)) + " L");
-		} catch (Exception e) {}
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(dtold.parse(date));
+			cal.add(Calendar.MINUTE, 2);
+			startDateText.setText(dtnew.format(cal.getTime()) + " L");
+		} catch (Exception e) {
+		}
 		startDateText.setBounds(189, 33, 169, 20);
 		frame.getContentPane().add(startDateText);
 		startDateText.setColumns(10);
-		
+
 		endDateText = new JTextField();
 		try {
-		endDateText.setText(dtnew.format(dtold.parse(date)) + " L");
-		} catch (Exception e) {}
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(dtold.parse(date));
+			cal.add(Calendar.MINUTE, 17);
+			endDateText.setText(dtnew.format(cal.getTime()) + " L");
+		} catch (Exception e) {
+		}
 		endDateText.setBounds(189, 58, 169, 20);
 		frame.getContentPane().add(endDateText);
 		endDateText.setColumns(10);
-		
+
 		reasonText = new JTextField();
 		reasonText.setText("Messaggio START");
 		reasonText.setBounds(189, 83, 169, 20);
 		frame.getContentPane().add(reasonText);
 		reasonText.setColumns(10);
-		
+
 		noteText = new JTextField();
 		noteText.setText("1.2");
 		noteText.setBounds(189, 108, 169, 20);
 		frame.getContentPane().add(noteText);
 		noteText.setColumns(10);
 		try {
-		creationDateText = new JTextField();
-		creationDateText.setText(dtnew.format(dtold.parse(date)) + " L");
-		} catch (Exception e) {}
+			creationDateText = new JTextField();
+			creationDateText.setText(dtnew.format(dtold.parse(date)) + " L");
+		} catch (Exception e) {
+		}
 		creationDateText.setBounds(189, 133, 169, 20);
 		frame.getContentPane().add(creationDateText);
 		creationDateText.setColumns(10);
-		
+
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -137,16 +146,12 @@ public class Creator {
 		});
 		cancelButton.setBounds(345, 238, 89, 23);
 		frame.getContentPane().add(cancelButton);
-		
+
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Created dialog = new Created(nameText.getText(),
-						startDateText.getText(),
-						endDateText.getText(),
-						noteText.getText(),
-						reasonText.getText(),
-						creationDateText.getText());
+				Created dialog = new Created(nameText.getText(), startDateText.getText(), endDateText.getText(),
+						noteText.getText(), reasonText.getText(), creationDateText.getText());
 			}
 		});
 		okButton.setBounds(246, 238, 89, 23);
