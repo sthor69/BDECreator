@@ -19,8 +19,8 @@ public class Creator {
 	private JTextField nameText;
 	private JTextField startDateText;
 	private JTextField endDateText;
-	private JTextField reasonText;
-	private JTextField noteText;
+	private JTextField variazTiniText;
+	private JTextField variazTfinText;
 	private JTextField creationDateText;
 
 	/**
@@ -68,21 +68,21 @@ public class Creator {
 		nameLabel.setBounds(10, 11, 169, 14);
 		frame.getContentPane().add(nameLabel);
 
-		JLabel startDateLabel = new JLabel("Data Ora Inizo");
+		JLabel startDateLabel = new JLabel("Data Ora Inizo Comando");
 		startDateLabel.setBounds(10, 36, 169, 14);
 		frame.getContentPane().add(startDateLabel);
 
-		JLabel EndDateLabel = new JLabel("Data Ora Fine");
+		JLabel EndDateLabel = new JLabel("Data Ora Fine Comando");
 		EndDateLabel.setBounds(10, 61, 169, 14);
 		frame.getContentPane().add(EndDateLabel);
 
-		JLabel reasonLabel = new JLabel("Motivazione");
-		reasonLabel.setBounds(10, 86, 169, 14);
-		frame.getContentPane().add(reasonLabel);
+		JLabel variazTiniLabel = new JLabel("Variazione potenza Prog Vinc (TINI)");
+		variazTiniLabel.setBounds(10, 86, 245, 14);
+		frame.getContentPane().add(variazTiniLabel);
 
-		JLabel noteLabel = new JLabel("Note");
-		noteLabel.setBounds(10, 111, 169, 14);
-		frame.getContentPane().add(noteLabel);
+		JLabel variazTfinLabel = new JLabel("Variazione potenza Prog Vinc (TFIN)");
+		variazTfinLabel.setBounds(10, 111, 245, 14);
+		frame.getContentPane().add(variazTfinLabel);
 
 		JLabel creationDateLabel = new JLabel("Data Creazione Messaggio");
 		creationDateLabel.setBounds(10, 136, 169, 14);
@@ -90,7 +90,7 @@ public class Creator {
 
 		nameText = new JTextField();
 		nameText.setText("UP_NAPOLIL_4");
-		nameText.setBounds(189, 8, 169, 20);
+		nameText.setBounds(265, 11, 169, 20);
 		frame.getContentPane().add(nameText);
 		nameText.setColumns(10);
 
@@ -102,7 +102,7 @@ public class Creator {
 			startDateText.setText(dtnew.format(cal.getTime()) + " L");
 		} catch (Exception e) {
 		}
-		startDateText.setBounds(189, 33, 169, 20);
+		startDateText.setBounds(265, 36, 169, 20);
 		frame.getContentPane().add(startDateText);
 		startDateText.setColumns(10);
 
@@ -114,27 +114,27 @@ public class Creator {
 			endDateText.setText(dtnew.format(cal.getTime()) + " L");
 		} catch (Exception e) {
 		}
-		endDateText.setBounds(189, 58, 169, 20);
+		endDateText.setBounds(265, 61, 169, 20);
 		frame.getContentPane().add(endDateText);
 		endDateText.setColumns(10);
 
-		reasonText = new JTextField();
-		reasonText.setText("Messaggio START");
-		reasonText.setBounds(189, 83, 169, 20);
-		frame.getContentPane().add(reasonText);
-		reasonText.setColumns(10);
+		variazTiniText = new JTextField();
+		variazTiniText.setText("0");
+		variazTiniText.setBounds(265, 86, 169, 20);
+		frame.getContentPane().add(variazTiniText);
+		variazTiniText.setColumns(10);
 
-		noteText = new JTextField();
-		noteText.setText("1.2");
-		noteText.setBounds(189, 108, 169, 20);
-		frame.getContentPane().add(noteText);
-		noteText.setColumns(10);
+		variazTfinText = new JTextField();
+		variazTfinText.setText("1.2");
+		variazTfinText.setBounds(265, 111, 169, 20);
+		frame.getContentPane().add(variazTfinText);
+		variazTfinText.setColumns(10);
 		try {
 			creationDateText = new JTextField();
 			creationDateText.setText(dtnew.format(dtold.parse(date)) + " L");
 		} catch (Exception e) {
 		}
-		creationDateText.setBounds(189, 133, 169, 20);
+		creationDateText.setBounds(265, 136, 169, 20);
 		frame.getContentPane().add(creationDateText);
 		creationDateText.setColumns(10);
 
@@ -151,7 +151,7 @@ public class Creator {
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Created dialog = new Created(nameText.getText(), startDateText.getText(), endDateText.getText(),
-						noteText.getText(), reasonText.getText(), creationDateText.getText());
+						variazTfinText.getText(), variazTiniText.getText(), creationDateText.getText());
 			}
 		});
 		okButton.setBounds(246, 238, 89, 23);
