@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Created extends JDialog {
 
-	String name = "UP_NAPOLIL_4", startDate = "16-10-2017 10:15:00 L", endDate = "16-10-2017 10:28:00 L",
+	String path = "", name = "UP_NAPOLIL_4", startDate = "16-10-2017 10:15:00 L", endDate = "16-10-2017 10:28:00 L",
 			note = "Messaggio START", reason = "1.2", creationDate = "16-10-2017 09:15:00 L";
 
 	private final JPanel contentPanel = new JPanel();
@@ -58,27 +58,24 @@ public class Created extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
 			{
 				JButton okButton = new JButton("Save");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						// Create a file chooser
-						// final JFileChooser fc = new JFileChooser();
-						// int returnVal = fc.showOpenDialog(Created.this);
-						// if (returnVal == JFileChooser.APPROVE_OPTION) {
-						// File file = fc.getSelectedFile();
-						//
+
 						try {
 
-							String path = Created.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-							path = path.substring(0,path.length() - 15) + File.separator;
+							String seqNumberPath = Created.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+							seqNumberPath = seqNumberPath.substring(0,seqNumberPath.length() - 15) + File.separator;
 							System.out.print(path);
-							File file = new File(path + "sequenceNumber.txt");
+							File file = new File(seqNumberPath + "sequenceNumber.txt");
 							BufferedReader brSeqNumb = new BufferedReader(new FileReader(file));
 							String sequenceNumber = brSeqNumb.readLine();
 							int seq = Integer.parseInt(sequenceNumber);
 							
-							PrintWriter pwBde = new PrintWriter(new File(path + "MG-" + ++seq + ".doc"));
+							System.out.println(path);
+							PrintWriter pwBde = new PrintWriter(new File(path + File.separator + "MG-" + ++seq + ".doc"));
 							pwBde.print(BdeMessagetextArea.getText());
 							pwBde.close();
 							
@@ -88,35 +85,41 @@ public class Created extends JDialog {
 
 							pwSeqNumb.print(seq);
 							pwSeqNumb.close();
+							
 						} catch (Exception ex) {
+						
 							ex.printStackTrace();
 						}
 						// }
 						System.exit(0);
 					}
 				});
+				
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
+				
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
 
-	public Created(String _name, String _startDate, String _endDate, String _note, String _reason,
+	public Created(String _path, String _name, String _startDate, String _endDate, String _note, String _reason,
 			String _creationDate) {
 
 		this();
 
+		path = _path;
 		name = _name;
 		startDate = _startDate;
 		endDate = _endDate;

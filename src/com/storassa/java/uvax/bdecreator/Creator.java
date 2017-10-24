@@ -22,11 +22,16 @@ public class Creator {
 	private JTextField variazTiniText;
 	private JTextField variazTfinText;
 	private JTextField creationDateText;
+	
+	private static String path;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		path = args[0];
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -96,24 +101,34 @@ public class Creator {
 
 		startDateText = new JTextField();
 		try {
+			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(dtold.parse(date));
 			cal.add(Calendar.MINUTE, 2);
 			startDateText.setText(dtnew.format(cal.getTime()) + " L");
+			
 		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
 		}
+		
 		startDateText.setBounds(265, 36, 169, 20);
 		frame.getContentPane().add(startDateText);
 		startDateText.setColumns(10);
 
 		endDateText = new JTextField();
 		try {
+			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(dtold.parse(date));
 			cal.add(Calendar.MINUTE, 17);
 			endDateText.setText(dtnew.format(cal.getTime()) + " L");
+			
 		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
 		}
+		
 		endDateText.setBounds(265, 61, 169, 20);
 		frame.getContentPane().add(endDateText);
 		endDateText.setColumns(10);
@@ -129,31 +144,41 @@ public class Creator {
 		variazTfinText.setBounds(265, 111, 169, 20);
 		frame.getContentPane().add(variazTfinText);
 		variazTfinText.setColumns(10);
+		
 		try {
+			
 			creationDateText = new JTextField();
 			creationDateText.setText(dtnew.format(dtold.parse(date)) + " L");
+			
 		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
 		}
+		
 		creationDateText.setBounds(265, 136, 169, 20);
 		frame.getContentPane().add(creationDateText);
 		creationDateText.setColumns(10);
 
 		JButton cancelButton = new JButton("Cancel");
+		
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
 		});
+		
 		cancelButton.setBounds(345, 238, 89, 23);
 		frame.getContentPane().add(cancelButton);
 
 		JButton okButton = new JButton("OK");
+		
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Created dialog = new Created(nameText.getText(), startDateText.getText(), endDateText.getText(),
+				Created dialog = new Created(path, nameText.getText(), startDateText.getText(), endDateText.getText(),
 						variazTfinText.getText(), variazTiniText.getText(), creationDateText.getText());
 			}
 		});
+		
 		okButton.setBounds(246, 238, 89, 23);
 		frame.getContentPane().add(okButton);
 	}
