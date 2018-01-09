@@ -189,8 +189,8 @@ public class Creator {
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String variazTini = startMsgRadioButton.isSelected()
-						? "0" : String.valueOf(Double.parseDouble(powerTextField.getText()) / 1000000);
-				String variazTfin = startMsgRadioButton.isSelected() ? "3" : "0";
+						? "0"  : "3";
+				String variazTfin = startMsgRadioButton.isSelected() ? String.valueOf(Double.parseDouble(powerTextField.getText()) / 1000000) : "0";
 				Created dialog = new Created(path, nameComboBox.getSelectedItem().toString(), startDateText.getText(),
 						endDateText.getText(), variazTini, variazTfin, creationDateText.getText(), Creator.this);
 			}
