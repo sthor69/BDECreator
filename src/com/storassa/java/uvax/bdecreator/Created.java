@@ -19,8 +19,10 @@ import javax.swing.border.EmptyBorder;
 
 public class Created extends JDialog {
 
-	String path = "", name = "UP_NAPOLIL_4", startDate = "16-10-2017 10:15:00 L", endDate = "16-10-2017 10:28:00 L",
-			note = "Messaggio START", reason = "1.2", creationDate = "16-10-2017 09:15:00 L";
+	String path = "", name = "UP_NAPOLIL_4", startDate = "16-10-2017 10:15:00 L", endDate = "16-10-2017 10:28:00 S",
+			initialPower = "Messaggio START", finalPower = "1.2", creationDate = "16-10-2017 09:15:00 S";
+	
+	private Creator creator;
 
 	private final JPanel contentPanel = new JPanel();
 	JTextArea BdeMessagetextArea;
@@ -90,8 +92,9 @@ public class Created extends JDialog {
 						
 							ex.printStackTrace();
 						}
-						// }
-						System.exit(0);
+						
+						creator.updateTimes();
+						dispose();
 					}
 				});
 				
@@ -114,17 +117,18 @@ public class Created extends JDialog {
 		}
 	}
 
-	public Created(String _path, String _name, String _startDate, String _endDate, String _note, String _reason,
-			String _creationDate) {
+	public Created(String _path, String _name, String _startDate, String _endDate, String _initialPower, String _finalPower,
+			String _creationDate, Creator _creator) {
 
 		this();
 
+		creator = _creator;
 		path = _path;
 		name = _name;
 		startDate = _startDate;
 		endDate = _endDate;
-		note = _note;
-		reason = _reason;
+		initialPower = _initialPower;
+		finalPower = _finalPower;
 		creationDate = _creationDate;
 
 		BdeMessagetextArea.setText("*************************************************\r\n"
@@ -133,12 +137,12 @@ public class Created extends JDialog {
 				+ "*************************************************\r\n" + "Nome UPA/UCA                        = " + name + "\r\n" 
 				+ "Data Ora Inizio Comando             = " + startDate + "\r\n"
 				+ "Data Ora Fine Comando               = " + endDate + "\r\n"
-				+ "Variazione potenza Prog Vinc (TINI) = 0\r\n"
-				+ "Variazione potenza Prog Vinc (TFIN) = 1.2\r\n"
+				+ "Variazione potenza Prog Vinc (TINI) = " + initialPower + "\r\n"
+				+ "Variazione potenza Prog Vinc (TFIN) = " + finalPower + "\r\n"
 				+ "Data Creazione Msg                  = " + creationDate + "\r\n"
 				+ "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\n"
 				+ "++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\n" + name + ";" + startDate + ";" + endDate
-				+ "\n" + reason + "\r\n"
+				+ "\n" + initialPower + finalPower + creationDate + "\r\n"
 				+ "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\n"
 				+ "++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\n"
 
